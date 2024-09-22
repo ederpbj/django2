@@ -50,6 +50,7 @@ pylint-report.txt
 
 # Virtual environment folders
 venv/
+.venv/
 env/
 ENV/
 

@@ -31,6 +31,9 @@ CREATE TABLE nome_da_tabela (
 
 \dt # listar tabelas
 
+# gitignore
+git rm -r --cached .
+
 # 5. Views
 
 
