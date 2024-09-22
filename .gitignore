@@ -48,6 +48,8 @@ pylint-report.txt
 /static/
 /media/
 
+README_ERROR.md
+
 # Virtual environment folders
 venv/
 .venv/
