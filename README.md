@@ -35,6 +35,7 @@ CREATE TABLE nome_da_tabela (
 git rm -r --cached .
 git add .
 git commit -m "Remover arquivos do controle de versão e atualizar .gitignore"
+git push origin mmaster
 
 # 5. Views
 
