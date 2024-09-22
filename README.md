@@ -37,7 +37,14 @@ git add .
 git commit -m "Remover arquivos do controle de versão e atualizar .gitignore"
 git push origin mmaster
 
-# 5. Views
+# 5. Criar Views
+# core/views
+
+# 6. Criar templates
+# index, contato e produto
+
+# 7. Criar statics
+# pastas static: css, images, js
 
 
 ```
