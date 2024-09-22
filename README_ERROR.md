@@ -17,4 +17,13 @@ brew cleanup
 brew install mysql@8.0
 
 mysql --version
+
+# instalar o mysql conector
+brew install mysql-connector-c
+brew install --cask mysql-connector-python
+
+# instalado
+brew install mysql-client
+mysql --version
+
 ```

@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    'core',
-    'bootstrap4',
-    'stdimage',
+    "core",
+    "bootstrap4",
+    "stdimage",
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,7 @@ WSGI_APPLICATION = "django2.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgres", # postgresql@14
+        "ENGINE": "django.db.backends.postgresql", # postgresql@14
         "NAME": "django2db",
         "USER": "postgres",
         "PASSWORD": "098098Pg#",
