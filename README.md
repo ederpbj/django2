@@ -33,6 +33,8 @@ CREATE TABLE nome_da_tabela (
 
 # gitignore
 git rm -r --cached .
+git add .
+git commit -m "Remover arquivos do controle de versão e atualizar .gitignore"
 
 # 5. Views
 
