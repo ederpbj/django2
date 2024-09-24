@@ -19,6 +19,7 @@ from django.contrib import messages
 def index(request):
     return render(request, 'index.html')
 
+# não grava os email no db
 def contato(request):
     form = ContatoForm(request.POST or None)
 
