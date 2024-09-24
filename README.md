@@ -46,7 +46,7 @@ CREATE TABLE nome_da_tabela (
 # 7. Criar pasta statics
 # pastas static: css, images, js
 
-# 8. Definindo urls
+# 8. Definindo rotas urls
 # django2/urls
     # path("/", include('core.urls')),
 # criar core/urls.py
@@ -69,5 +69,22 @@ python manage.py runserver # rodar para testar
 python manage.py collectstatic
 
 python manage.py check # verificacões
+
+# 12. Criar form
+# criar core/forms.py
+# usar o shell, para ver as funções do form
+python manage.py shell
+from django import forms
+dir(forms) # mostra as funções disponíveis
+dir(forms.Form) # mostra as funções disponíveis
+help(forms.Form.is_valid) # mostra as funções disponíveis
+
+help(forms.CharField) # mostra atributos 
+
+# atualizar core/views com o form
+
+# 13. usando bootstrap no contato.html
+# 14. Criar core/forms.py
+
 
 ```
