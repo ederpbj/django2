@@ -15,10 +15,12 @@ class ContatoForm(forms.Form):
 
         conteudo = f'Nome: {nome}\n E-mail: {email}\n Assunto: {assunto}\n Mensagem: {mensagem}'
 
+        # instancia o objeto da classe
         mail = EmailMessage(
             subject='E-mail enviado pelo sistema django2',
             body= conteudo,
             from_email= 'contato@seudominio.com.br',
+            to=['contato@zuarts.com.br','admin@zuarts.com.br' ],
             headers={'Reply-to': email}
         )
         mail.send()

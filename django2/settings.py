@@ -136,7 +136,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGOUT_REDIRECT_URL = 'index'
 
-# simula serviço de email
+# simula serviço envio de email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # se ouver servidor de e-mail
