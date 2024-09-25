@@ -85,6 +85,14 @@ help(forms.CharField) # mostra atributos
 
 # 13. usando bootstrap no contato.html
 # 14. Criar core/forms.py
+# 15 executar migration
+python manage.py makemigrations
+python manage.py migrate
 
+
+# 16. Registrar o core/admin
+
+# criar super usuário
+python manage.py createsuperuser
 
 ```
