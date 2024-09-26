@@ -141,10 +141,10 @@ heroku ps:scale web=1 --app django2-zu # redeploy usando dino
 
 # coletar arquivos estaticos
 heroku run python manage.py collectstatic --app django2-zu
-
+heroku run python manage.py migrate --app django2-zu
 
 heroku config:set SECRET_KEY='django-insecure-(p&4zusfz&p!a-)lw$tmzml(rvez7q&o#pjv0_m*_wl^j=yrve'
 
-
+heroku ps --app django2-zu
 ```
 [docs bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
