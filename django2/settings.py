@@ -9,16 +9,14 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-from django.conf.global_settings import DATABASES
-
+from django.conf.global_settings import DATABASES, STATICFILES_DIRS
 import os
 from pathlib import Path
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-#DATABASE_URL = ' postgres://uejlalvfc198to:p81c6007db9ec89ceb3487b3c0cd228ff1b70b36746e1a1c524c2e1b9e37357bf@ccba8a0vn4fb2p.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dd5pnggais0hha'
 
-# Usando postgresql com heroku
+# Usando postgresql com Heroku
 if os.getenv('DATABASE_URL'):
     # Configuração de banco de dados para Heroku
     DATABASES = {
@@ -29,48 +27,29 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'django2db',
-            'USER': 'postgres',
-            'PASSWORD': '098098Pg#',
-            'HOST': 'localhost',
-            'PORT': '5432',
+            'NAME': os.getenv('DB_NAME', 'django2db'),
+            'USER': os.getenv('DB_USER', 'postgres'),
+            'PASSWORD': os.getenv('DB_PASSWORD', '098098Pg#'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
         }
     }
 
-
-
-
-
 # Substitua a configuração de DATABASES quando estiver no Heroku
-#DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
-
-#from django.conf.global_settings import EMAIL_BACKEND, MEDIA_URL, MEDIA_ROOT
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-#BASE_DIR = Path(__file__).resolve().parent.parent
-
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = "django-insecure-(p&4zusfz&p!a-)lw$tmzml(rvez7q&o#pjv0_m*_wl^j=yrve"
-
-# Configurações de segurança
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-(p&4zusfz&p!a-)lw$tmzml(rvez7q&o#pjv0_m*_wl^j=yrve')
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1']
 
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
-
-ALLOWED_HOSTS = ['*']
-#ALLOWED_HOSTS = ['your-app-name.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -115,36 +94,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "django2.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-"""
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql", # postgresql@14
-        "NAME": "django2db",
-        "USER": "postgres",
-        "PASSWORD": "098098Pg#",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "django2db",
-        "USER": "root",
-        "PASSWORD": "098098My#",
-        "HOST": "localhost",
-        "PORT": "",
-    }
-}
-"""
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -160,45 +111,41 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'pt-br'
-
 TIME_ZONE = 'America/Sao_Paulo'
-
 USE_I18N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+STATIC_URL = '/static/'  # URL de acesso aos arquivos estáticos
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Caminho onde os arquivos estáticos serão coletados
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Diretórios adicionais de arquivos estáticos
 
-#STATIC_URL = 'static/' # usado durante o desenvolvimento
-STATIC_ROOT = BASE_DIR/'staticfiles' # usado durante a produção
+# Configuração do Whitenoise para servir arquivos estáticos
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# serve para upload de arquivo
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR/'media'
+# Arquivos de mídia
+MEDIA_URL = '/media/'  # URL para acesso aos arquivos de mídia
+MEDIA_ROOT = BASE_DIR / 'media'  # Diretório onde os arquivos de mídia serão armazenados
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Redirecionamento após logout
 LOGOUT_REDIRECT_URL = 'index'
 
-# simula serviço envio de email
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Simulação de envio de e-mail
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# se ouver servidor de e-mail
+# Configuração de envio de e-mails (se houver um servidor de e-mail)
 """
 EMAIL_HOST = 'localhost'
 EMAIL_HOST_USER = 'no-reply@seudominio.com.br'
-EMAIL PORT = 587
-EMAIL_USER_TSL = True
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = 'sua-senha'
 """

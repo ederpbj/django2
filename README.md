@@ -142,8 +142,7 @@ heroku ps:scale web=1 --app django2-zu # redeploy usando dino
 
 
 
-
-
+heroku config:set SECRET_KEY='django-insecure-(p&4zusfz&p!a-)lw$tmzml(rvez7q&o#pjv0_m*_wl^j=yrve'
 
 
 ```
