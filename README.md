@@ -107,7 +107,7 @@ pip install dj_database_url psycopg2-binary
 
 pip freeze > requirements.txt
 
-# 18. criar arquivos ProcFile e runtime.txt, para heroko rodar
+# 18. criar arquivos Procfile e runtime.txt, para heroko rodar
 
 # 19. migrar db para heroku
 heroku --help
