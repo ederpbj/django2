@@ -118,6 +118,9 @@ heroku addons:create heroku-postgresql:essential-0 --app django2-zu # instalar p
 heroku addons:info postgresql-cubed-18354 # information
 heroku addons:docs heroku-postgresql # document
 
+# migrando db para heroku
+heroku run python manage.py migrate --app django2-zu
+
 # 20. Instalar postgresql no heroku
 pip install dj-database-url
 
@@ -126,6 +129,20 @@ heroku addons:create heroku-postgresql --app django2-zu
 heroku run python manage.py migrate --app django2-zu
 heroku run python manage.py makemigrations --app django2-zu
 heroku run python manage.py createsuperuser --app django2-zu
+
+# verifica erros no heroku
+heroku logs --tail --app django2-zu
+heroku run python manage.py migrate --app django2-zu # migra db
+heroku run python manage.py collectstatic --noinput --app django2-zu # arquivos estaticos
+heroku config --app django2-zu # configuracao de ambiente
+web: gunicorn django2.wsgi --log-file - # procfile
+heroku run python manage.py dbshell --app django2-zu # verifica logs
+
+
+
+
+
+
 
 
 ```
