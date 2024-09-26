@@ -23,8 +23,10 @@ db.sqlite3
 .env
 *.local
 
-# Django migration files
-migrations/
+# Ignore specific migration files (but NOT the migrations folder)
+# Ajuste a linha abaixo para não ignorar a pasta 'migrations/' inteira
+# Ignorar apenas arquivos de migração que não precisam ser versionados
+*.pyc
 
 # Pytest cache
 .pytest_cache/

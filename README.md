@@ -146,5 +146,29 @@ heroku run python manage.py migrate --app django2-zu
 heroku config:set SECRET_KEY='django-insecure-(p&4zusfz&p!a-)lw$tmzml(rvez7q&o#pjv0_m*_wl^j=yrve'
 
 heroku ps --app django2-zu
+heroku logs --tail --app django2-zu # erros no log
+heroku config:set DEBUG=True --app django2-zu # ativar depuração em produção temporariamente
+heroku run python manage.py showmigrations --app django2-zu # verificar as migrações
+# fazer 1
+heroku run python manage.py makemigrations core --app django2-zu # migracoes do core
+heroku run python manage.py migrate --app django2-zu # aplicar
+heroku run python manage.py migrate core --app django2-zu # aplicar
+heroku run python manage.py showmigrations --app django2-zu # verificar
+
+
+
+# fazer 2
+heroku run python manage.py migrate --app django2-zu # aplicar migration
+heroku run python manage.py makemigrations core --app django2-zu # recriar migracoes
+heroku run python manage.py migrate --app django2-zu # aplicar migracoes
+heroku pg:psql --app django2-zu # verificar db diretamente
+\d # sair
+
+
+
+
+
+
+
 ```
 [docs bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
