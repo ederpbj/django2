@@ -108,5 +108,25 @@ pip install dj_database_url psycopg2-binary
 pip freeze > requirements.txt
 
 # 18. criar arquivos ProcFile e runtime.txt, para heroko rodar
+
+# 19. migrar db para heroku
+heroku --help
+heroku update # atualiza
+heroku login 
+heroku addons:plans heroku-postgresql # verifica a disponibilidade planos postgres
+heroku addons:create heroku-postgresql:essential-0 --app django2-zu # instalar postgress no heroku
+heroku addons:info postgresql-cubed-18354 # information
+heroku addons:docs heroku-postgresql # document
+
+# 20. Instalar postgresql no heroku
+pip install dj-database-url
+
+heroku addons:create heroku-postgresql --app django2-zu
+
+heroku run python manage.py migrate --app django2-zu
+heroku run python manage.py makemigrations --app django2-zu
+heroku run python manage.py createsuperuser --app django2-zu
+
+
 ```
 [docs bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
