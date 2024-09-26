@@ -17,21 +17,18 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-
-from core.views import index, contato
-
 from django.conf.urls import handler404, handler500
+
 from core import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
     path('painel/', admin.site.urls), # recomenda-se mudar de admin para outro ex painel
     # Cada aplicação define suas rotas
     path('', include('core.urls')), # Rotas gerenciadas pela aplicação core
-
-    # path('', index),
-    # path('contato', contato),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Acesso aos arquivos de midia
 
 handler404 = views.error404
 handler500 = views.error500
