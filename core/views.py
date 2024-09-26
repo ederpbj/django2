@@ -1,18 +1,7 @@
-from lib2to3.fixes.fix_input import context
-
 from django.shortcuts import render
-
-from django.utils import timezone  # Importar timezone do Django
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
-
-from .models import Produto
-
 from django.http import HttpResponse
 from django.template import loader
-
-from .forms import ContatoForm
-
+from .forms import ContatoForm, ProdutoModelForm
 from django.contrib import messages
 
 # Create your views here.
@@ -48,7 +37,27 @@ def contato(request):
     return render(request, 'contato.html', context)
 
 def produto(request):
-    return render(request, 'produto.html')
+    if str(request.method) == 'POST':
+        form = ProdutoModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            prod = form.save(commit=False) # ainda nao salva no db
+
+            print(f'Nome: {prod.nome}')
+            print(f'Preco: {prod.preco}')
+            print(f'Estoque: {prod.estoque}')
+            print(f'Imagem: {prod.imagem}')
+
+            messages.success(request, 'Produto salvo com sucesso!')
+            form = ProdutoModelForm()
+        else: # form invalido
+            messages.error(request, 'Erro ao salva o produto!')
+    else: # caso nao seja do tipo post
+        form = ProdutoModelForm() # limpa o formulario
+    context = {
+        'form': form
+    }
+
+    return render(request, 'produto.html', context)
 
 def error404(request, exception):
     template = loader.get_template('404.html')

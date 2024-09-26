@@ -95,4 +95,9 @@ python manage.py migrate
 # criar super usuário
 python manage.py createsuperuser
 
+# pacote para imagens
+#pip install django-pictures # nao funcionou
+pip install django-imagekit
+pip list # lista pacotes instalados
+
 ```

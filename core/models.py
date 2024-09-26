@@ -1,7 +1,8 @@
 from django.db import models
-from stdimage.models import StdImageField
 from django.db.models import signals
 from django.template.defaultfilters import slugify
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 # Classe base
 class Base(models.Model):
@@ -17,7 +18,13 @@ class Produto(Base):
     nome = models.CharField('Nome', max_length=100)
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=8)
     estoque = models.IntegerField('Estoque')
-    imagem = StdImageField('Imagem', upload_to='produtos', variations={'thumb': (124, 124)})
+    imagem = models.ImageField(upload_to='products/', default='default.jpg')
+    is_active = models.BooleanField(default=True)
+    # Cria uma versão da imagem redimensionada para thumbnail
+    thumbnail = ImageSpecField(source='imagem',
+                                processors=[ResizeToFill(100, 100)],
+                                format='JPEG',
+                                options={'quality': 60})
     slug = models.SlugField('Slug', max_length=100, blank=True, editable=False)
 
     def __str__(self):
@@ -29,6 +36,7 @@ def produto_pre_save(signal, instance, sender, **kwargs):
 
 # Conectando o sinal pre_save ao modelo Produto
 signals.pre_save.connect(produto_pre_save, sender=Produto)
+
 
 
 """
