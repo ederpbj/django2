@@ -1,10 +1,11 @@
 from lib2to3.fixes.fix_input import context
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from .forms import ContatoForm, ProdutoModelForm
 from django.contrib import messages
+from django.shortcuts import redirect
 
 from .models import Produto
 
@@ -45,29 +46,25 @@ def contato(request):
     return render(request, 'contato.html', context)
 
 def produto(request):
-    if str(request.method) == 'POST':
-        form = ProdutoModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            """
-            prod = form.save(commit=False) # ainda nao salva no db
-            print(f'Nome: {prod.nome}')
-            print(f'Preco: {prod.preco}')
-            print(f'Estoque: {prod.estoque}')
-            print(f'Imagem: {prod.imagem}')
-            """
-            form.save() # salva no banco de dados
+    # print(f'Usuário: {request.user}')
+    if str(request.user) != 'AnonymousUser':
+        if str(request.method) == 'POST':
+            form = ProdutoModelForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save() # salva no banco de dados
+                messages.success(request, 'Produto salvo com sucesso!')
+                form = ProdutoModelForm()
+            else: # form invalido
+                messages.error(request, 'Erro ao salva o produto!')
+        else: # caso nao seja do tipo post
+            form = ProdutoModelForm() # limpa o formulario
+        context = {
+            'form': form
+        }
 
-            messages.success(request, 'Produto salvo com sucesso!')
-            form = ProdutoModelForm()
-        else: # form invalido
-            messages.error(request, 'Erro ao salva o produto!')
-    else: # caso nao seja do tipo post
-        form = ProdutoModelForm() # limpa o formulario
-    context = {
-        'form': form
-    }
-
-    return render(request, 'produto.html', context)
+        return render(request, 'produto.html', context)
+    else:
+        return redirect('index')
 
 def error404(request, exception):
     template = loader.get_template('404.html')
