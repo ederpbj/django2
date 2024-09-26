@@ -1,12 +1,20 @@
+from lib2to3.fixes.fix_input import context
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .forms import ContatoForm, ProdutoModelForm
 from django.contrib import messages
 
+from .models import Produto
+
+
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    context ={
+        'produtos': Produto.objects.all() # lista os produtos no index
+    }
+    return render(request, 'index.html', context)
 
 # não grava os email no db
 def contato(request):

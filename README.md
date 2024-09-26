@@ -1,3 +1,5 @@
+from ensurepip import bootstrap
+
 # Projeto Django2
 
 ```Python
@@ -101,3 +103,4 @@ pip install django-imagekit
 pip list # lista pacotes instalados
 
 ```
+[docs bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
