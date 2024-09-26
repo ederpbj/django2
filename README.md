@@ -123,49 +123,38 @@ heroku run python manage.py migrate --app django2-zu
 
 # 20. Instalar postgresql no heroku
 pip install dj-database-url
-
 heroku addons:create heroku-postgresql --app django2-zu
-
-heroku run python manage.py migrate --app django2-zu
-heroku run python manage.py makemigrations --app django2-zu
-heroku run python manage.py createsuperuser --app django2-zu
-
 heroku logs --tail --app django2-zu # verifica erros no heroku
 heroku run python manage.py migrate --app django2-zu # migra db
 heroku run python manage.py collectstatic --app django2-zu # arquivos estaticos
 heroku config --app django2-zu # configuracao de ambiente
 web: gunicorn django2.wsgi --log-file - # procfile
 heroku run python manage.py dbshell --app django2-zu # verifica logs
-
 heroku ps:scale web=1 --app django2-zu # redeploy usando dino
-
 # coletar arquivos estaticos
 heroku run python manage.py collectstatic --app django2-zu
 heroku run python manage.py migrate --app django2-zu
-
 heroku config:set SECRET_KEY='django-insecure-(p&4zusfz&p!a-)lw$tmzml(rvez7q&o#pjv0_m*_wl^j=yrve'
-
 heroku ps --app django2-zu
 heroku logs --tail --app django2-zu # erros no log
 heroku config:set DEBUG=True --app django2-zu # ativar depuração em produção temporariamente
 heroku run python manage.py showmigrations --app django2-zu # verificar as migrações
 
-# Error 1,
 # ajuste do gitignore e aplicação do migrate
 heroku run python manage.py makemigrations core --app django2-zu # migracoes do core
 heroku run python manage.py migrate --app django2-zu # aplicar
 heroku run python manage.py migrate core --app django2-zu # aplicar
 heroku run python manage.py showmigrations --app django2-zu # verificar
-
-
-
-# fazer 2
-heroku run python manage.py migrate --app django2-zu # aplicar migration
-heroku run python manage.py makemigrations core --app django2-zu # recriar migracoes core
-heroku run python manage.py migrate --app django2-zu # aplicar migracoes
 heroku pg:psql --app django2-zu # verificar db diretamente
 \d # sair
+heroku config:set DEBUG=False --app django2-zu
+heroku run python manage.py createsuperuser --app django2-zu # criar superusuario
 
+# 21. Tratar imagens no heroku
+pip install dj-static
+pip install -r requirements.txt # ver se não falta nada
+pip uninstall whitenoise # remover
+pip freeze > requirements.txt
 
 
 
