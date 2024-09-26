@@ -142,7 +142,7 @@ heroku run python manage.py showmigrations --app django2-zu # verificar as migra
 
 # ajuste do gitignore e aplicação do migrate
 heroku run python manage.py makemigrations core --app django2-zu # migracoes do core
-heroku run python manage.py migrate --app django2-zu # aplicar
+heroku run python manage.py migrate --app django2-zu # migrar
 heroku run python manage.py migrate core --app django2-zu # aplicar
 heroku run python manage.py showmigrations --app django2-zu # verificar
 heroku pg:psql --app django2-zu # verificar db diretamente
@@ -150,16 +150,18 @@ heroku pg:psql --app django2-zu # verificar db diretamente
 heroku config:set DEBUG=False --app django2-zu
 heroku run python manage.py createsuperuser --app django2-zu # criar superusuario
 
+# Cloudinary no Heroku, outra alternativa para hospedar midia 
+
 # 21. Tratar imagens no heroku
 pip install dj-static
 pip install -r requirements.txt # ver se não falta nada
 pip uninstall whitenoise # remover
 pip freeze > requirements.txt
 
-
-
-
-
+heroku pg:reset DATABASE_URL --app django2-zu --confirm django2-zu # reseta o banco de dados
+heroku run python manage.py migrate --app django2-zu # migrar
+heroku run python manage.py createsuperuser --app django2-zu # criar superusuario
+heroku logs --tail --app django2-zu # verificar erros
 
 ```
 [docs bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)

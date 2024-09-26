@@ -48,7 +48,7 @@ pylint-report.txt
 
 # Static and media folders
 /static/
-/media/
+#/media/
 
 README_ERROR.md
 
