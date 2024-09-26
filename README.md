@@ -107,5 +107,6 @@ pip install dj_database_url psycopg2-binary
 
 pip freeze > requirements.txt
 
+# 18. criar arquivos ProcFile e runtime.txt, para heroko rodar
 ```
 [docs bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
