@@ -149,7 +149,9 @@ heroku ps --app django2-zu
 heroku logs --tail --app django2-zu # erros no log
 heroku config:set DEBUG=True --app django2-zu # ativar depuração em produção temporariamente
 heroku run python manage.py showmigrations --app django2-zu # verificar as migrações
-# fazer 1
+
+# Error 1,
+# ajuste do gitignore e aplicação do migrate
 heroku run python manage.py makemigrations core --app django2-zu # migracoes do core
 heroku run python manage.py migrate --app django2-zu # aplicar
 heroku run python manage.py migrate core --app django2-zu # aplicar
