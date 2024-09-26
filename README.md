@@ -1,4 +1,4 @@
-from ensurepip import bootstrap
+from gc import freezefrom distutils.command.install import installfrom ensurepip import bootstrap
 
 # Projeto Django2
 
@@ -101,6 +101,11 @@ python manage.py createsuperuser
 #pip install django-pictures # nao funcionou
 pip install django-imagekit
 pip list # lista pacotes instalados
+
+# 17. publicando no heroku
+pip install dj_database_url psycopg2-binary
+
+pip freeze > requirements.txt
 
 ```
 [docs bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)

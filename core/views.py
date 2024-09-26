@@ -64,7 +64,7 @@ def produto(request):
 
         return render(request, 'produto.html', context)
     else:
-        return redirect('index')
+        return redirect('index') # direciona para index se não estiver logado
 
 def error404(request, exception):
     template = loader.get_template('404.html')
