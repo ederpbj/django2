@@ -16,6 +16,14 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Diretório adicional de arquivos estáticos apenas em desenvolvimento
+if os.getenv('ENV') == 'development':
+    STATICFILES_DIRS = [BASE_DIR / 'static']
+else:
+    STATICFILES_DIRS = []
+
+
+
 # Usando postgresql com Heroku
 if os.getenv('DATABASE_URL'):
     # Configuração de banco de dados para Heroku
@@ -121,8 +129,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = '/static/'  # URL de acesso aos arquivos estáticos
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Caminho onde os arquivos estáticos serão coletados
-STATICFILES_DIRS = [BASE_DIR / 'static']  # Diretórios adicionais de arquivos estáticos
+#STATIC_ROOT = BASE_DIR / 'staticfiles'  # Caminho onde os arquivos estáticos serão coletados
+#STATICFILES_DIRS = [BASE_DIR / 'static']  # Diretórios adicionais de arquivos estáticos
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Configuração do Whitenoise para servir arquivos estáticos
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
