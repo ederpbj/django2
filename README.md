@@ -161,7 +161,7 @@ heroku run python manage.py showmigrations --app django2-zu # verificar
 
 # fazer 2
 heroku run python manage.py migrate --app django2-zu # aplicar migration
-heroku run python manage.py makemigrations core --app django2-zu # recriar migracoes
+heroku run python manage.py makemigrations core --app django2-zu # recriar migracoes core
 heroku run python manage.py migrate --app django2-zu # aplicar migracoes
 heroku pg:psql --app django2-zu # verificar db diretamente
 \d # sair
