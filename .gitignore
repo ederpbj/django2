@@ -23,10 +23,14 @@ db.sqlite3
 .env
 *.local
 
-# Ignore specific migration files (but NOT the migrations folder)
-# Ajuste a linha abaixo para não ignorar a pasta 'migrations/' inteira
-# Ignorar apenas arquivos de migração que não precisam ser versionados
-*.pyc
+# Não ignore a pasta migrations/ inteira, mas ignore arquivos .pyc e outros irrelevantes
+!*/migrations/
+*/migrations/*.pyc  # Ignorar apenas arquivos compilados de migração
+*/migrations/*.log  # Ignorar logs de migração, se houver
+
+# Não ignore arquivos essenciais de migração
+!*/migrations/__init__.py
+!*/migrations/0001_initial.py
 
 # Pytest cache
 .pytest_cache/
@@ -47,8 +51,8 @@ pylint-report.txt
 .vscode/
 
 # Static and media folders
+/media/  # Ajuste dependendo do uso do Cloudinary ou outros serviços de armazenamento
 /static/
-#/media/
 
 README_ERROR.md
 

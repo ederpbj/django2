@@ -163,5 +163,13 @@ heroku run python manage.py migrate --app django2-zu # migrar
 heroku run python manage.py createsuperuser --app django2-zu # criar superusuario
 heroku logs --tail --app django2-zu # verificar erros
 
+heroku run python manage.py collectstatic --app django2-zu # coletar estaticos
+
+# migration do core
+heroku run python manage.py makemigrations core --app django2-zu # migrar
+heroku run python manage.py migrate core --app django2-zu # aplicar
+heroku run python manage.py showmigrations core --app django2-zu # verificar
+
+
 ```
 [docs bootstrap](https://getbootstrap.com/docs/5.3/content/tables/)
