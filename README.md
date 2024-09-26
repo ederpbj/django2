@@ -130,13 +130,14 @@ heroku run python manage.py migrate --app django2-zu
 heroku run python manage.py makemigrations --app django2-zu
 heroku run python manage.py createsuperuser --app django2-zu
 
-# verifica erros no heroku
-heroku logs --tail --app django2-zu
+heroku logs --tail --app django2-zu # verifica erros no heroku
 heroku run python manage.py migrate --app django2-zu # migra db
-heroku run python manage.py collectstatic --noinput --app django2-zu # arquivos estaticos
+heroku run python manage.py collectstatic --app django2-zu # arquivos estaticos
 heroku config --app django2-zu # configuracao de ambiente
 web: gunicorn django2.wsgi --log-file - # procfile
 heroku run python manage.py dbshell --app django2-zu # verifica logs
+
+heroku ps:scale web=1 --app django2-zu # redeploy usando dino
 
 
 
