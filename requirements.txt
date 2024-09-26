@@ -17,6 +17,7 @@ psycopg2==2.9.9
 psycopg2-binary==2.9.9
 psycopg2-pool==1.2
 PyMySQL==1.1.1
+python-dotenv==1.0.1
 soupsieve==2.6
 sqlparse==0.5.1
 typing_extensions==4.12.2
