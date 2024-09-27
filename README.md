@@ -169,6 +169,7 @@ heroku run python manage.py collectstatic --app django2-zu # coletar estaticos
 heroku run python manage.py makemigrations core --app django2-zu # migrar
 heroku run python manage.py migrate core --app django2-zu # aplicar
 heroku run python manage.py showmigrations core --app django2-zu # verificar
+heroku run python manage.py collectstatic --app django2-zu # arquivos estaticos
 
 
 ```
